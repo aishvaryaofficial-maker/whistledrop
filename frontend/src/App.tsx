@@ -23,13 +23,14 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <AuthProvider>
         <BrowserRouter>
-          <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 transition-colors duration-200">
+          <div className="flex flex-col min-h-screen bg-white dark:bg-[#0F172A] text-[#111827] dark:text-[#F8FAFC] transition-colors duration-200">
             <Navbar />
             <main className="flex-1">
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/report" element={<ReportSubmissionPage />} />
+                <Route path="/reports" element={<ReportSubmissionPage />} />
                 <Route path="/report/success" element={<ReportSuccessPage />} />
                 <Route path="/track" element={<ReportTrackingPage />} />
                 <Route path="/track/:caseCode" element={<ReportTrackingPage />} />

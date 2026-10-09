@@ -145,7 +145,7 @@ export const ModeratorReportDetailPage: React.FC = () => {
       <div className="max-w-3xl mx-auto px-4 py-16">
         <Link
           to="/moderator/dashboard"
-          className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors mb-6"
+          className="inline-flex items-center gap-1.5 text-xs text-[#6B7280] hover:text-[#111827] dark:text-[#CBD5E1] dark:hover:text-white transition-colors mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Return to Dashboard</span>
@@ -169,29 +169,29 @@ export const ModeratorReportDetailPage: React.FC = () => {
       {/* Back button */}
       <Link
         to="/moderator/dashboard"
-        className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-400 hover:text-white transition-colors mb-6"
+        className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#6B7280] hover:text-[#111827] dark:text-[#CBD5E1] dark:hover:text-white transition-colors mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Moderator Dashboard</span>
       </Link>
 
       {/* Case Header Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-xl backdrop-blur-md mb-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] shadow-xl mb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#E5E7EB] dark:border-[#334155]">
           <div>
-            <span className="text-[11px] uppercase font-mono tracking-wider text-slate-400 block mb-0.5">
+            <span className="text-[11px] uppercase font-mono tracking-wider text-[#6B7280] dark:text-[#CBD5E1] block mb-0.5">
               Case Code
             </span>
             <div className="flex items-center gap-2">
-              <span className="text-2xl sm:text-3xl font-mono font-bold text-white tracking-wider">
+              <span className="text-2xl sm:text-3xl font-mono font-bold text-[#111827] dark:text-white tracking-wider">
                 {report.caseCode}
               </span>
               <button
                 onClick={handleCopyCode}
-                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-[#F3F4F6] hover:bg-slate-200 text-[#111827] dark:bg-[#0F172A] dark:hover:bg-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
                 title="Copy case code"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                {copied ? <Check className="w-4 h-4 text-blue-600 dark:text-blue-400" /> : <Copy className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -200,7 +200,7 @@ export const ModeratorReportDetailPage: React.FC = () => {
             <StatusBadge status={report.status} displayName={report.statusDisplayName} size="lg" />
             <button
               onClick={fetchReport}
-              className="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl bg-[#F3F4F6] hover:bg-slate-200 text-[#111827] border border-[#E5E7EB] dark:bg-[#0F172A] dark:hover:bg-slate-700 dark:text-slate-300 dark:border-[#334155] transition-colors cursor-pointer"
               title="Refresh case details"
             >
               <RefreshCw className="w-4 h-4" />
@@ -210,21 +210,21 @@ export const ModeratorReportDetailPage: React.FC = () => {
 
         {/* Metadata info */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-5 text-xs">
-          <div className="p-3 rounded-xl bg-slate-950/40 border border-slate-800/60">
-            <span className="text-slate-500 font-mono block mb-1">Category</span>
+          <div className="p-3 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A]/40 border border-[#E5E7EB] dark:border-[#334155]/60">
+            <span className="text-[#6B7280] dark:text-slate-400 font-mono block mb-1">Category</span>
             <CategoryBadge category={report.category} displayName={report.categoryDisplayName} />
           </div>
-          <div className="p-3 rounded-xl bg-slate-950/40 border border-slate-800/60">
-            <span className="text-slate-500 font-mono block mb-1">Intake Timestamp</span>
-            <div className="flex items-center gap-1.5 text-slate-300 font-mono">
-              <Calendar className="w-3.5 h-3.5 text-slate-500" />
+          <div className="p-3 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A]/40 border border-[#E5E7EB] dark:border-[#334155]/60">
+            <span className="text-[#6B7280] dark:text-slate-400 font-mono block mb-1">Intake Timestamp</span>
+            <div className="flex items-center gap-1.5 text-[#111827] dark:text-slate-300 font-mono">
+              <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               <span>{formatDate(report.createdAt)}</span>
             </div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-950/40 border border-slate-800/60">
-            <span className="text-slate-500 font-mono block mb-1">Last Transition</span>
-            <div className="flex items-center gap-1.5 text-slate-300 font-mono">
-              <Clock className="w-3.5 h-3.5 text-slate-500" />
+          <div className="p-3 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A]/40 border border-[#E5E7EB] dark:border-[#334155]/60">
+            <span className="text-[#6B7280] dark:text-slate-400 font-mono block mb-1">Last Transition</span>
+            <div className="flex items-center gap-1.5 text-[#111827] dark:text-slate-300 font-mono">
+              <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               <span>{formatDate(report.updatedAt)}</span>
             </div>
           </div>
@@ -235,26 +235,26 @@ export const ModeratorReportDetailPage: React.FC = () => {
         {/* Left Column: Narrative and Status Update Form */}
         <div className="lg:col-span-2 space-y-8">
           {/* Narrative Card */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border border-slate-800/80">
-            <h3 className="text-base font-bold text-white mb-3 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-emerald-400" />
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] shadow-sm">
+            <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC] mb-3 flex items-center gap-2">
+              <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <span>Submitted Narrative</span>
             </h3>
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-sm text-slate-200 leading-relaxed whitespace-pre-wrap font-sans">
+            <div className="p-4 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A]/80 border border-[#E5E7EB] dark:border-[#334155] text-sm text-[#111827] dark:text-[#CBD5E1] leading-relaxed whitespace-pre-wrap font-sans">
               {report.description}
             </div>
 
             {report.evidenceUrl && (
-              <div className="mt-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 flex items-center justify-between gap-3 text-xs">
+              <div className="mt-4 p-4 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A]/60 border border-[#E5E7EB] dark:border-[#334155]/80 flex items-center justify-between gap-3 text-xs">
                 <div className="truncate">
-                  <span className="text-slate-400 font-mono block text-[10px] uppercase">Attached Evidence Link:</span>
-                  <span className="text-cyan-400 font-mono truncate">{report.evidenceUrl}</span>
+                  <span className="text-[#6B7280] dark:text-slate-400 font-mono block text-[10px] uppercase">Attached Evidence Link:</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-mono truncate">{report.evidenceUrl}</span>
                 </div>
                 <a
                   href={report.evidenceUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-cyan-950/30 text-cyan-300 border border-cyan-800/40 hover:bg-cyan-900/40 transition-colors shrink-0 font-medium"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800/40 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors shrink-0 font-medium"
                 >
                   <span>Open URL</span>
                   <ExternalLink className="w-3 h-3" />
@@ -264,13 +264,13 @@ export const ModeratorReportDetailPage: React.FC = () => {
           </div>
 
           {/* Moderator Status Update Interface */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-xl">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] shadow-xl">
             <div className="mb-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Edit3 className="w-5 h-5 text-emerald-400" />
+              <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] flex items-center gap-2">
+                <Edit3 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <span>Update Report Status & Append Audit Note</span>
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-[#6B7280] dark:text-[#CBD5E1] mt-1">
                 Transitions are governed by backend business rules. All updates append an immutable audit log entry.
               </p>
             </div>
@@ -298,8 +298,8 @@ export const ModeratorReportDetailPage: React.FC = () => {
             <form onSubmit={handleStatusSubmit} className="space-y-4">
               {/* Target Status Selector */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2 font-mono">
-                  Select Target Status <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#111827] dark:text-[#CBD5E1] mb-2 font-mono">
+                  Select Target Status <span className="text-rose-500">*</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {transitionsList.map((stat) => {
@@ -312,12 +312,12 @@ export const ModeratorReportDetailPage: React.FC = () => {
                         onClick={() => setTargetStatus(stat)}
                         className={`p-3 rounded-xl border text-center text-xs font-medium transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-emerald-950/40 border-emerald-500 text-emerald-300 ring-2 ring-emerald-500/20'
-                            : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                            ? 'bg-blue-50 border-blue-600 text-blue-700 ring-2 ring-blue-500/20 dark:bg-blue-950/40 dark:border-blue-500 dark:text-blue-300'
+                            : 'bg-[#F3F4F6] border-[#E5E7EB] text-[#6B7280] hover:border-slate-300 dark:bg-[#0F172A] dark:border-[#334155] dark:text-slate-400 dark:hover:border-slate-600'
                         }`}
                       >
                         <span className="block font-semibold">{stat}</span>
-                        {isCurrent && <span className="text-[10px] text-slate-500">(Current)</span>}
+                        {isCurrent && <span className="text-[10px] text-[#6B7280] dark:text-slate-500">(Current)</span>}
                       </button>
                     );
                   })}
@@ -327,10 +327,10 @@ export const ModeratorReportDetailPage: React.FC = () => {
               {/* Status Update Note Message */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label htmlFor="updateNote" className="block text-xs font-semibold uppercase tracking-wider text-slate-300 font-mono">
-                    Audit Note / Explanation <span className="text-rose-400">*</span>
+                  <label htmlFor="updateNote" className="block text-xs font-semibold uppercase tracking-wider text-[#111827] dark:text-[#CBD5E1] font-mono">
+                    Audit Note / Explanation <span className="text-rose-500">*</span>
                   </label>
-                  <span className="text-[11px] font-mono text-slate-500">
+                  <span className="text-[11px] font-mono text-[#6B7280] dark:text-slate-500">
                     {updateMessage.trim().length} / 1000 (min 5)
                   </span>
                 </div>
@@ -340,7 +340,7 @@ export const ModeratorReportDetailPage: React.FC = () => {
                   value={updateMessage}
                   onChange={(e) => setUpdateMessage(e.target.value)}
                   placeholder="Record justification, investigative findings, or guidance visible to the reporter on their tracking terminal..."
-                  className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-xs sm:text-sm leading-relaxed"
+                  className="w-full p-3.5 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A] border border-[#E5E7EB] dark:border-[#334155] text-[#111827] dark:text-[#F8FAFC] placeholder-[#9CA3AF] dark:placeholder-[#64748B] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 dark:focus:border-blue-400 dark:focus:ring-blue-400 text-xs sm:text-sm leading-relaxed"
                 />
               </div>
 
@@ -348,11 +348,11 @@ export const ModeratorReportDetailPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isUpdating || !targetStatus || updateMessage.trim().length < 5}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-slate-950 bg-emerald-400 hover:bg-emerald-300 disabled:opacity-50 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-xs sm:text-sm text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 disabled:opacity-50 transition-all shadow-md shadow-blue-500/20 cursor-pointer"
                 >
                   {isUpdating ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       <span>Updating...</span>
                     </>
                   ) : (
@@ -369,12 +369,12 @@ export const ModeratorReportDetailPage: React.FC = () => {
 
         {/* Right Column: Complete Status Timeline */}
         <div className="space-y-6">
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800/80 sticky top-24">
-            <h3 className="text-base font-bold text-white mb-1 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-emerald-400" />
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] shadow-sm sticky top-24">
+            <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC] mb-1 flex items-center gap-2">
+              <Shield className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <span>Status Audit History</span>
             </h3>
-            <p className="text-xs text-slate-500 mb-6">
+            <p className="text-xs text-[#6B7280] dark:text-slate-400 mb-6">
               Complete history of status transitions and moderator notes.
             </p>
 

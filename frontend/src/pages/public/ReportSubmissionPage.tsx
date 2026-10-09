@@ -124,7 +124,7 @@ export const ReportSubmissionPage: React.FC = () => {
       {/* Back button */}
       <Link
         to="/"
-        className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-400 hover:text-white transition-colors mb-6"
+        className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#6B7280] hover:text-[#111827] dark:text-[#CBD5E1] dark:hover:text-white transition-colors mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Return to Home</span>
@@ -132,24 +132,24 @@ export const ReportSubmissionPage: React.FC = () => {
 
       {/* Header */}
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono mb-3">
-          <EyeOff className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/10 dark:border-blue-500/25 dark:text-blue-400 text-xs font-mono mb-3">
+          <EyeOff className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
           <span>Zero-Knowledge Intake Terminal</span>
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
           Submit Confidential Report
         </h1>
-        <p className="text-sm text-slate-400 mt-2 max-w-2xl leading-relaxed">
+        <p className="text-sm text-[#6B7280] dark:text-[#CBD5E1] mt-2 max-w-2xl leading-relaxed">
           Provide factual information regarding your concern. No identity, device tracking, or account creation is
           required.
         </p>
       </div>
 
       {/* Privacy Notice Banner */}
-      <div className="mb-8 p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/40 flex items-start gap-3 text-xs sm:text-sm text-emerald-300">
-        <Lock className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+      <div className="mb-8 p-4 rounded-xl bg-blue-50/80 border border-blue-200 text-blue-900 dark:bg-blue-950/20 dark:border-blue-900/40 dark:text-blue-300 flex items-start gap-3 text-xs sm:text-sm">
+        <Lock className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
         <div>
-          <span className="font-semibold block text-emerald-200">Privacy Notice</span>
+          <span className="font-semibold block text-blue-950 dark:text-blue-200">Privacy Notice</span>
           You are not required to provide identifying information. Do not include your name or personal contact info
           in the description unless you deliberately intend to disclose it.
         </div>
@@ -166,11 +166,11 @@ export const ReportSubmissionPage: React.FC = () => {
       )}
 
       {/* Form */}
-      <form onSubmit={handleReviewStep} className="space-y-8 bg-slate-900/40 p-6 sm:p-8 rounded-2xl border border-slate-800/80">
+      <form onSubmit={handleReviewStep} className="space-y-8 bg-white dark:bg-[#1E293B] p-6 sm:p-8 rounded-2xl border border-[#E5E7EB] dark:border-[#334155] shadow-sm">
         {/* Category Selection */}
         <div>
-          <label className="block text-sm font-semibold text-slate-200 mb-2">
-            1. Select Concern Category <span className="text-rose-400">*</span>
+          <label className="block text-sm font-semibold text-[#111827] dark:text-[#F8FAFC] mb-2">
+            1. Select Concern Category <span className="text-rose-500">*</span>
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {CATEGORIES.map((cat) => {
@@ -182,37 +182,37 @@ export const ReportSubmissionPage: React.FC = () => {
                   onClick={() => setCategory(cat.value)}
                   className={`p-4 rounded-xl border text-left transition-all flex flex-col justify-between cursor-pointer ${
                     selected
-                      ? 'bg-emerald-950/30 border-emerald-500/60 ring-2 ring-emerald-500/20'
-                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                      ? 'bg-blue-50/80 border-blue-600 ring-2 ring-blue-500/20 dark:bg-blue-950/40 dark:border-blue-500'
+                      : 'bg-[#F3F4F6] border-[#E5E7EB] hover:border-slate-300 dark:bg-[#0F172A]/60 dark:border-[#334155] dark:hover:border-slate-600'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full mb-1">
-                    <span className="font-semibold text-sm text-slate-100">{cat.label}</span>
+                    <span className="font-semibold text-sm text-[#111827] dark:text-[#F8FAFC]">{cat.label}</span>
                     {selected && (
-                      <span className="w-4 h-4 rounded-full bg-emerald-500 flex items-center justify-center text-slate-950">
+                      <span className="w-4 h-4 rounded-full bg-blue-600 text-white dark:bg-blue-500 flex items-center justify-center">
                         <Check className="w-3 h-3 stroke-[3]" />
                       </span>
                     )}
                   </div>
-                  <span className="text-xs text-slate-400">{cat.desc}</span>
+                  <span className="text-xs text-[#6B7280] dark:text-[#CBD5E1]">{cat.desc}</span>
                 </button>
               );
             })}
           </div>
-          {errors.category && <p className="text-xs text-rose-400 mt-2">{errors.category}</p>}
+          {errors.category && <p className="text-xs text-rose-500 mt-2">{errors.category}</p>}
         </div>
 
         {/* Narrative Description */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label htmlFor="description" className="block text-sm font-semibold text-slate-200">
-              2. Factual Narrative / Description <span className="text-rose-400">*</span>
+            <label htmlFor="description" className="block text-sm font-semibold text-[#111827] dark:text-[#F8FAFC]">
+              2. Factual Narrative / Description <span className="text-rose-500">*</span>
             </label>
             <span
               className={`text-xs font-mono ${
                 description.trim().length < 20 || description.trim().length > 5000
-                  ? 'text-amber-400'
-                  : 'text-slate-400'
+                  ? 'text-amber-600 dark:text-amber-400'
+                  : 'text-[#6B7280] dark:text-[#CBD5E1]'
               }`}
             >
               {description.trim().length} / 5000 chars (min 20)
@@ -224,10 +224,10 @@ export const ReportSubmissionPage: React.FC = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Please detail what occurred, dates, parties involved, or affected systems. Be as objective and factual as possible..."
-            className="w-full p-4 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm leading-relaxed"
+            className="w-full p-4 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A] border border-[#E5E7EB] dark:border-[#334155] text-[#111827] dark:text-[#F8FAFC] placeholder-[#9CA3AF] dark:placeholder-[#64748B] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 dark:focus:border-blue-400 dark:focus:ring-blue-400 text-sm leading-relaxed"
           />
           {errors.description && (
-            <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+            <p className="text-xs text-rose-500 mt-1 flex items-center gap-1">
               <AlertCircle className="w-3.5 h-3.5" />
               <span>{errors.description}</span>
             </p>
@@ -236,43 +236,43 @@ export const ReportSubmissionPage: React.FC = () => {
 
         {/* Evidence URL */}
         <div>
-          <label htmlFor="evidenceUrl" className="block text-sm font-semibold text-slate-200 mb-1 flex items-center gap-2">
+          <label htmlFor="evidenceUrl" className="block text-sm font-semibold text-[#111827] dark:text-[#F8FAFC] mb-1 flex items-center gap-2">
             <span>3. Optional Supporting Evidence URL</span>
-            <span className="text-xs font-normal text-slate-500 font-mono">(Cloud drive, logs, document link)</span>
+            <span className="text-xs font-normal text-[#6B7280] dark:text-[#CBD5E1] font-mono">(Cloud drive, logs, document link)</span>
           </label>
           <div className="relative">
-            <LinkIcon className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <LinkIcon className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               id="evidenceUrl"
               type="url"
               value={evidenceUrl}
               onChange={(e) => setEvidenceUrl(e.target.value)}
               placeholder="https://drive.example.com/s/sample-evidence or https://..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm font-mono"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A] border border-[#E5E7EB] dark:border-[#334155] text-[#111827] dark:text-[#F8FAFC] placeholder-[#9CA3AF] dark:placeholder-[#64748B] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 dark:focus:border-blue-400 dark:focus:ring-blue-400 text-sm font-mono"
             />
           </div>
           {errors.evidenceUrl ? (
-            <p className="text-xs text-rose-400 mt-1 flex items-center gap-1">
+            <p className="text-xs text-rose-500 mt-1 flex items-center gap-1">
               <AlertCircle className="w-3.5 h-3.5" />
               <span>{errors.evidenceUrl}</span>
             </p>
           ) : (
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-[#6B7280] dark:text-[#CBD5E1] mt-1">
               Must begin with http:// or https://. External link only. Do not upload files directly with personal metadata.
             </p>
           )}
         </div>
 
         {/* Submit Button */}
-        <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <ShieldAlert className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#334155] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-xs text-[#6B7280] dark:text-[#CBD5E1]">
+            <ShieldAlert className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
             <span>Case tracking token will be generated on submission.</span>
           </div>
 
           <button
             type="submit"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition-all shadow-md shadow-emerald-500/20 active:scale-[0.99] cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-md shadow-blue-500/20 active:scale-[0.99] cursor-pointer"
           >
             <span>Review & Lodge Report</span>
             <Send className="w-4 h-4" />
@@ -282,33 +282,33 @@ export const ReportSubmissionPage: React.FC = () => {
 
       {/* Confirmation Step Modal */}
       {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="max-w-lg w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150">
+          <div className="max-w-lg w-full bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
               <Lock className="w-6 h-6" />
             </div>
 
             <div>
-              <h3 className="text-lg font-bold text-white">Confirm Confidential Submission</h3>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+              <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">Confirm Confidential Submission</h3>
+              <p className="text-xs sm:text-sm text-[#6B7280] dark:text-[#CBD5E1] mt-1">
                 Please double-check your submission. Once lodged, a collision-safe case code will be generated to track
                 moderator updates.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 text-xs space-y-2">
+            <div className="p-4 rounded-xl bg-[#F3F4F6] dark:bg-[#0F172A]/70 border border-[#E5E7EB] dark:border-[#334155] text-xs space-y-2">
               <div>
-                <span className="text-slate-500 font-mono">Category: </span>
-                <span className="text-emerald-400 font-semibold">{category}</span>
+                <span className="text-[#6B7280] dark:text-[#CBD5E1] font-mono">Category: </span>
+                <span className="text-blue-600 dark:text-blue-400 font-semibold">{category}</span>
               </div>
               <div>
-                <span className="text-slate-500 font-mono">Description length: </span>
-                <span className="text-slate-300 font-mono">{description.trim().length} characters</span>
+                <span className="text-[#6B7280] dark:text-[#CBD5E1] font-mono">Description length: </span>
+                <span className="text-[#111827] dark:text-[#F8FAFC] font-mono">{description.trim().length} characters</span>
               </div>
               {evidenceUrl.trim() && (
                 <div className="truncate">
-                  <span className="text-slate-500 font-mono">Evidence: </span>
-                  <span className="text-cyan-400 font-mono">{evidenceUrl.trim()}</span>
+                  <span className="text-[#6B7280] dark:text-[#CBD5E1] font-mono">Evidence: </span>
+                  <span className="text-blue-600 dark:text-blue-400 font-mono">{evidenceUrl.trim()}</span>
                 </div>
               )}
             </div>
@@ -318,7 +318,7 @@ export const ReportSubmissionPage: React.FC = () => {
                 type="button"
                 onClick={() => setShowConfirmModal(false)}
                 disabled={isSubmitting}
-                className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-[#6B7280] hover:text-[#111827] hover:bg-slate-100 dark:text-[#CBD5E1] dark:hover:text-white dark:hover:bg-slate-800 transition-colors cursor-pointer"
               >
                 Go Back & Edit
               </button>
@@ -326,11 +326,11 @@ export const ReportSubmissionPage: React.FC = () => {
                 type="button"
                 onClick={handleConfirmedSubmit}
                 disabled={isSubmitting}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 disabled:opacity-50 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 disabled:opacity-50 transition-all shadow-md shadow-blue-500/20 cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     <span>Lodge Report...</span>
                   </>
                 ) : (

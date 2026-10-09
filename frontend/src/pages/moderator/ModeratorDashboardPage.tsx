@@ -124,21 +124,21 @@ export const ModeratorDashboardPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono mb-2">
-            <Shield className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/10 dark:border-blue-500/25 dark:text-blue-400 text-xs font-mono mb-2">
+            <Shield className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>Operational Triage & Review Console</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
             Moderator Dashboard
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#6B7280] dark:text-[#CBD5E1] mt-1">
             Review confidential incident reports, inspect evidence, and manage status lifecycles.
           </p>
         </div>
 
         <button
           onClick={handleRefresh}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs sm:text-sm font-medium transition-colors self-start sm:self-auto cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-[#111827] border border-[#E5E7EB] dark:bg-[#1E293B] dark:hover:bg-slate-700 dark:text-[#F8FAFC] dark:border-[#334155] text-xs sm:text-sm font-medium transition-colors self-start sm:self-auto cursor-pointer shadow-sm"
           title="Refresh dashboard data"
         >
           <RefreshCw className={`w-4 h-4 ${reportsLoading ? 'animate-spin' : ''}`} />
@@ -201,23 +201,23 @@ export const ModeratorDashboardPage: React.FC = () => {
       )}
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 mb-6">
+      <div className="p-4 rounded-2xl bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] shadow-sm mb-6">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           {/* Case Code Search Form */}
           <form onSubmit={handleSearchSubmit} className="flex-1 flex gap-2">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by Case Code (e.g. WD-9K...)"
-                className="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 font-mono uppercase"
+                className="w-full pl-10 pr-4 py-2 bg-[#F3F4F6] dark:bg-[#0F172A] border border-[#E5E7EB] dark:border-[#334155] rounded-xl text-xs sm:text-sm text-[#111827] dark:text-[#F8FAFC] placeholder-[#9CA3AF] dark:placeholder-[#64748B] focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 font-mono uppercase"
               />
             </div>
             <button
               type="submit"
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium rounded-xl transition-colors shrink-0 cursor-pointer"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium rounded-xl transition-colors shrink-0 cursor-pointer shadow-sm"
             >
               Search
             </button>
@@ -227,14 +227,14 @@ export const ModeratorDashboardPage: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             {/* Status dropdown */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-500 font-mono hidden sm:inline">Status:</span>
+              <span className="text-xs text-[#6B7280] dark:text-slate-400 font-mono hidden sm:inline">Status:</span>
               <select
                 value={selectedStatus}
                 onChange={(e) => {
                   setSelectedStatus(e.target.value as ReportStatus | '');
                   setCurrentPage(0);
                 }}
-                className="px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-emerald-500"
+                className="px-3 py-2 bg-[#F3F4F6] dark:bg-[#0F172A] border border-[#E5E7EB] dark:border-[#334155] rounded-xl text-xs text-[#111827] dark:text-[#F8FAFC] focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 cursor-pointer"
               >
                 <option value="">All Statuses</option>
                 <option value="SUBMITTED">Submitted</option>
@@ -246,14 +246,14 @@ export const ModeratorDashboardPage: React.FC = () => {
 
             {/* Category dropdown */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-500 font-mono hidden sm:inline">Category:</span>
+              <span className="text-xs text-[#6B7280] dark:text-slate-400 font-mono hidden sm:inline">Category:</span>
               <select
                 value={selectedCategory}
                 onChange={(e) => {
                   setSelectedCategory(e.target.value as ReportCategory | '');
                   setCurrentPage(0);
                 }}
-                className="px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-emerald-500"
+                className="px-3 py-2 bg-[#F3F4F6] dark:bg-[#0F172A] border border-[#E5E7EB] dark:border-[#334155] rounded-xl text-xs text-[#111827] dark:text-[#F8FAFC] focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 cursor-pointer"
               >
                 <option value="">All Categories</option>
                 <option value="SECURITY">Security</option>
@@ -273,7 +273,7 @@ export const ModeratorDashboardPage: React.FC = () => {
                   setSearchTerm('');
                   setCurrentPage(0);
                 }}
-                className="text-xs text-slate-400 hover:text-rose-400 py-1 px-2 font-mono cursor-pointer"
+                className="text-xs text-[#6B7280] hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 py-1 px-2 font-mono cursor-pointer"
               >
                 Reset
               </button>
@@ -283,11 +283,11 @@ export const ModeratorDashboardPage: React.FC = () => {
       </div>
 
       {/* Reports Table (Desktop) / Cards (Mobile) */}
-      <div className="rounded-2xl bg-slate-900/40 border border-slate-800 overflow-hidden shadow-xl">
+      <div className="rounded-2xl bg-white dark:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#334155] overflow-hidden shadow-xl">
         {/* Table View (sm and up) */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm">
-            <thead className="bg-slate-950/80 border-b border-slate-800 text-slate-400 font-mono uppercase text-[11px] tracking-wider">
+            <thead className="bg-[#F3F4F6] dark:bg-[#0F172A]/80 border-b border-[#E5E7EB] dark:border-[#334155] text-[#6B7280] dark:text-slate-400 font-mono uppercase text-[11px] tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Case Code</th>
                 <th className="py-3.5 px-4">Category</th>
@@ -297,7 +297,7 @@ export const ModeratorDashboardPage: React.FC = () => {
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-[#E5E7EB] dark:divide-slate-800/60">
               {reportsLoading ? (
                 <>
                   <TableRowSkeleton cols={6} />
@@ -307,21 +307,21 @@ export const ModeratorDashboardPage: React.FC = () => {
                 </>
               ) : reportsList.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-slate-500">
+                  <td colSpan={6} className="py-12 text-center text-[#6B7280] dark:text-slate-500">
                     <Inbox className="w-10 h-10 mx-auto mb-2 opacity-40" />
-                    <p className="text-sm font-medium text-slate-400">No reports found</p>
-                    <p className="text-xs text-slate-500 mt-1">Try adjusting your filters or search term.</p>
+                    <p className="text-sm font-medium text-[#111827] dark:text-slate-400">No reports found</p>
+                    <p className="text-xs text-[#6B7280] dark:text-slate-500 mt-1">Try adjusting your filters or search term.</p>
                   </td>
                 </tr>
               ) : (
                 reportsList.map((rep) => (
                   <tr
                     key={rep.caseCode}
-                    className="hover:bg-slate-800/40 transition-colors group cursor-pointer"
+                    className="hover:bg-blue-50/50 dark:hover:bg-slate-800/40 transition-colors group cursor-pointer"
                     onClick={() => navigate(`/moderator/reports/${rep.caseCode}`)}
                   >
-                    <td className="py-4 px-4 font-mono font-bold text-slate-100 tracking-wider">
-                      <span className="group-hover:text-emerald-400 transition-colors">
+                    <td className="py-4 px-4 font-mono font-bold text-[#111827] dark:text-slate-100 tracking-wider">
+                      <span className="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {rep.caseCode}
                       </span>
                     </td>
@@ -331,17 +331,17 @@ export const ModeratorDashboardPage: React.FC = () => {
                     <td className="py-4 px-4">
                       <StatusBadge status={rep.status} displayName={rep.statusDisplayName} size="sm" />
                     </td>
-                    <td className="py-4 px-4 text-slate-400 max-w-xs truncate text-xs font-sans">
+                    <td className="py-4 px-4 text-[#6B7280] dark:text-slate-400 max-w-xs truncate text-xs font-sans">
                       {rep.previewDescription || '—'}
                     </td>
-                    <td className="py-4 px-4 text-slate-400 font-mono text-xs whitespace-nowrap">
+                    <td className="py-4 px-4 text-[#6B7280] dark:text-slate-400 font-mono text-xs whitespace-nowrap">
                       {formatDate(rep.createdAt)}
                     </td>
                     <td className="py-4 px-4 text-right">
                       <Link
                         to={`/moderator/reports/${rep.caseCode}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-slate-700/80 hover:border-emerald-500/40 text-xs font-medium transition-all"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 dark:bg-slate-800 dark:hover:bg-blue-900/30 dark:text-slate-300 dark:hover:text-blue-300 dark:border-slate-700 dark:hover:border-blue-500/40 text-xs font-medium transition-all"
                       >
                         <span>Review</span>
                         <ExternalLink className="w-3 h-3" />
@@ -355,37 +355,37 @@ export const ModeratorDashboardPage: React.FC = () => {
         </div>
 
         {/* Mobile Stacked Card View */}
-        <div className="md:hidden divide-y divide-slate-800/80">
+        <div className="md:hidden divide-y divide-[#E5E7EB] dark:divide-slate-800/80">
           {reportsLoading ? (
             <div className="p-4 space-y-3">
               <TableRowSkeleton cols={2} />
               <TableRowSkeleton cols={2} />
             </div>
           ) : reportsList.length === 0 ? (
-            <div className="py-12 text-center text-slate-500">
+            <div className="py-12 text-center text-[#6B7280] dark:text-slate-500">
               <Inbox className="w-10 h-10 mx-auto mb-2 opacity-40" />
-              <p className="text-sm font-medium text-slate-400">No reports found</p>
+              <p className="text-sm font-medium text-[#111827] dark:text-slate-400">No reports found</p>
             </div>
           ) : (
             reportsList.map((rep) => (
               <div
                 key={rep.caseCode}
                 onClick={() => navigate(`/moderator/reports/${rep.caseCode}`)}
-                className="p-4 space-y-3 hover:bg-slate-800/30 transition-colors cursor-pointer"
+                className="p-4 space-y-3 hover:bg-blue-50/40 dark:hover:bg-slate-800/30 transition-colors cursor-pointer"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono font-bold text-sm text-emerald-400">{rep.caseCode}</span>
+                  <span className="font-mono font-bold text-sm text-blue-600 dark:text-blue-400">{rep.caseCode}</span>
                   <StatusBadge status={rep.status} displayName={rep.statusDisplayName} size="sm" />
                 </div>
                 <div className="flex items-center gap-2">
                   <CategoryBadge category={rep.category} displayName={rep.categoryDisplayName} size="sm" />
-                  <span className="text-[11px] text-slate-500 font-mono">{formatDate(rep.createdAt)}</span>
+                  <span className="text-[11px] text-[#6B7280] dark:text-slate-500 font-mono">{formatDate(rep.createdAt)}</span>
                 </div>
-                <p className="text-xs text-slate-300 line-clamp-2">{rep.previewDescription}</p>
+                <p className="text-xs text-[#111827] dark:text-slate-300 line-clamp-2">{rep.previewDescription}</p>
                 <div className="pt-2 flex justify-end">
                   <Link
                     to={`/moderator/reports/${rep.caseCode}`}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-medium text-slate-200"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 dark:bg-slate-800 dark:text-slate-200 text-xs font-medium"
                   >
                     <span>Open Case</span>
                     <ExternalLink className="w-3 h-3" />
@@ -397,24 +397,24 @@ export const ModeratorDashboardPage: React.FC = () => {
         </div>
 
         {/* Pagination Bar */}
-        <div className="p-4 bg-slate-950/60 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 font-mono">
+        <div className="p-4 bg-[#F3F4F6] dark:bg-[#0F172A]/60 border-t border-[#E5E7EB] dark:border-[#334155] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#6B7280] dark:text-slate-400 font-mono">
           <div>
             Showing{' '}
-            <span className="font-bold text-slate-200">
+            <span className="font-bold text-[#111827] dark:text-slate-200">
               {reportsList.length > 0 ? currentPage * pageSize + 1 : 0}
             </span>{' '}
             to{' '}
-            <span className="font-bold text-slate-200">
+            <span className="font-bold text-[#111827] dark:text-slate-200">
               {Math.min((currentPage + 1) * pageSize, totalElements)}
             </span>{' '}
-            of <span className="font-bold text-slate-200">{totalElements}</span> cases
+            of <span className="font-bold text-[#111827] dark:text-slate-200">{totalElements}</span> cases
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
               disabled={currentPage === 0 || reportsLoading}
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 disabled:opacity-40 border border-slate-800 text-slate-300 transition-colors cursor-pointer"
+              className="p-2 rounded-lg bg-white hover:bg-slate-100 dark:bg-[#1E293B] dark:hover:bg-slate-700 disabled:opacity-40 border border-[#E5E7EB] dark:border-[#334155] text-[#111827] dark:text-slate-300 transition-colors cursor-pointer"
               aria-label="Previous page"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -425,7 +425,7 @@ export const ModeratorDashboardPage: React.FC = () => {
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={currentPage >= totalPages - 1 || reportsLoading}
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 disabled:opacity-40 border border-slate-800 text-slate-300 transition-colors cursor-pointer"
+              className="p-2 rounded-lg bg-white hover:bg-slate-100 dark:bg-[#1E293B] dark:hover:bg-slate-700 disabled:opacity-40 border border-[#E5E7EB] dark:border-[#334155] text-[#111827] dark:text-slate-300 transition-colors cursor-pointer"
               aria-label="Next page"
             >
               <ChevronRight className="w-4 h-4" />

@@ -27,46 +27,46 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, displayName, s
     case 'SUBMITTED':
       return (
         <span
-          className={`inline-flex items-center font-medium rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800/60 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-medium rounded-full bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/60 ${sizeClasses[size]}`}
           aria-label={`Status: ${name}`}
         >
-          <Clock className={`${iconSizes[size]} text-sky-400`} />
+          <Clock className={`${iconSizes[size]} text-blue-600 dark:text-blue-400`} />
           <span>{name}</span>
         </span>
       );
     case 'UNDER_REVIEW':
       return (
         <span
-          className={`inline-flex items-center font-medium rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/60 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-medium rounded-full bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/60 ${sizeClasses[size]}`}
           aria-label={`Status: ${name}`}
         >
-          <Search className={`${iconSizes[size]} text-amber-500 dark:text-amber-400 animate-pulse`} />
+          <Search className={`${iconSizes[size]} text-amber-600 dark:text-amber-400 animate-pulse`} />
           <span>{name}</span>
         </span>
       );
     case 'RESOLVED':
       return (
         <span
-          className={`inline-flex items-center font-medium rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/60 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-medium rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/60 ${sizeClasses[size]}`}
           aria-label={`Status: ${name}`}
         >
-          <CheckCircle2 className={`${iconSizes[size]} text-emerald-500 dark:text-emerald-400`} />
+          <CheckCircle2 className={`${iconSizes[size]} text-emerald-600 dark:text-emerald-400`} />
           <span>{name}</span>
         </span>
       );
     case 'DISMISSED':
       return (
         <span
-          className={`inline-flex items-center font-medium rounded-full bg-slate-500/10 text-slate-400 border border-slate-500/20 dark:bg-slate-800/60 dark:text-slate-400 dark:border-slate-700 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-medium rounded-full bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/60 dark:text-slate-400 dark:border-slate-700 ${sizeClasses[size]}`}
           aria-label={`Status: ${name}`}
         >
-          <XCircle className={`${iconSizes[size]} text-slate-400`} />
+          <XCircle className={`${iconSizes[size]} text-slate-500 dark:text-slate-400`} />
           <span>{name}</span>
         </span>
       );
     default:
       return (
-        <span className={`inline-flex items-center font-medium rounded-full bg-slate-800 text-slate-300 ${sizeClasses[size]}`}>
+        <span className={`inline-flex items-center font-medium rounded-full bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300 ${sizeClasses[size]}`}>
           {name}
         </span>
       );
