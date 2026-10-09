@@ -4,6 +4,7 @@ frontend/dist/
 .env
 .env.*
 !.env.example
+!frontend/.env.production
 *.log
 .idea/
 .vscode/

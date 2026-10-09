@@ -5,6 +5,7 @@ import com.whistledrop.dto.response.ApiResponse;
 import com.whistledrop.security.CustomUserDetailsService;
 import com.whistledrop.security.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,6 +28,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,6 +40,9 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final CustomUserDetailsService userDetailsService;
     private final ObjectMapper objectMapper;
+
+    @Value("${whistledrop.cors.allowed-origins:}")
+    private String customAllowedOrigins;
 
     public SecurityConfig(
             JwtAuthenticationFilter jwtAuthFilter,
@@ -57,12 +62,18 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // For H2 console if used
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Public Anonymous WhistleDrop Endpoints
-                .requestMatchers(HttpMethod.POST, "/api/reports").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/reports/**").permitAll()
+                // Explicitly permit CORS preflight OPTIONS requests for all endpoints
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                // Root & Health check endpoints
+                .requestMatchers(HttpMethod.GET, "/", "/api/health", "/health").permitAll()
+
+                // Public Anonymous WhistleDrop Intake & Tracking Endpoints
+                .requestMatchers(HttpMethod.POST, "/api/reports", "/api/reports/").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/reports/**", "/api/reports").permitAll()
 
                 // Authentication Endpoints
-                .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/login/").permitAll()
 
                 // Swagger & OpenAPI
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
@@ -73,11 +84,11 @@ public class SecurityConfig {
                 // Error endpoint
                 .requestMatchers("/error").permitAll()
 
-                // Protected Moderator Endpoints
+                // Protected Moderator Endpoints (Strictly Authenticated and Authorized)
                 .requestMatchers("/api/moderator/**").hasAnyRole("MODERATOR", "ADMIN")
                 .requestMatchers("/api/auth/me").authenticated()
 
-                // All other endpoints
+                // All other endpoints require authentication
                 .anyRequest().authenticated()
             )
             .exceptionHandling(exceptions -> exceptions
@@ -121,14 +132,34 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "http://localhost:3000",
-            "http://127.0.0.1:5173",
-            "http://127.0.0.1:3000"
+
+        List<String> allowedOriginPatterns = new ArrayList<>(List.of(
+            "http://localhost:*",
+            "http://127.0.0.1:*",
+            "https://whistledrop-teal.vercel.app",
+            "https://*.vercel.app"
         ));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With"));
+
+        if (customAllowedOrigins != null && !customAllowedOrigins.isBlank()) {
+            for (String origin : customAllowedOrigins.split(",")) {
+                String trimmed = origin.trim();
+                if (!trimmed.isEmpty() && !allowedOriginPatterns.contains(trimmed)) {
+                    allowedOriginPatterns.add(trimmed);
+                }
+            }
+        }
+
+        configuration.setAllowedOriginPatterns(allowedOriginPatterns);
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
+        configuration.setAllowedHeaders(Arrays.asList(
+            "Authorization",
+            "Content-Type",
+            "Accept",
+            "X-Requested-With",
+            "Origin",
+            "Access-Control-Request-Method",
+            "Access-Control-Request-Headers"
+        ));
         configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);

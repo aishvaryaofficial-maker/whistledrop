@@ -8,12 +8,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,7 +31,7 @@ class PublicReportControllerIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Test
-    @DisplayName("POST /api/reports - Should create report and return 201 Created with valid case code")
+    @DisplayName("POST /api/reports - Should create report anonymously without auth header and return 201 Created with valid case code")
     void shouldCreateReportSuccessfully() throws Exception {
         CreateReportRequest request = new CreateReportRequest(
                 ReportCategory.SECURITY,
@@ -70,5 +73,36 @@ class PublicReportControllerIntegrationTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.success", is(false)))
                 .andExpect(jsonPath("$.message", containsString("No confidential report found")));
+    }
+
+    @Test
+    @DisplayName("GET / - Should return 200 OK operational status without authentication")
+    void shouldReturnOkFromRootStatusEndpoint() throws Exception {
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success", is(true)))
+                .andExpect(jsonPath("$.data.status", is("UP")))
+                .andExpect(jsonPath("$.data.service", containsString("WhistleDrop")));
+    }
+
+    @Test
+    @DisplayName("GET /api/health - Should return 200 OK health check without authentication")
+    void shouldReturnOkFromHealthEndpoint() throws Exception {
+        mockMvc.perform(get("/api/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success", is(true)))
+                .andExpect(jsonPath("$.data.status", is("UP")));
+    }
+
+    @Test
+    @DisplayName("OPTIONS /api/reports - Should permit CORS preflight from Vercel deployed frontend")
+    void shouldAllowCorsPreflightFromVercel() throws Exception {
+        mockMvc.perform(options("/api/reports")
+                        .header(HttpHeaders.ORIGIN, "https://whistledrop-teal.vercel.app")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD, "POST")
+                        .header(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS, "Content-Type,Authorization"))
+                .andExpect(status().isOk())
+                .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "https://whistledrop-teal.vercel.app"))
+                .andExpect(header().string(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true"));
     }
 }

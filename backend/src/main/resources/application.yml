@@ -33,6 +33,10 @@ jwt:
   secret: WhistleDropGdgsrmConfidentialPlatformSecretKey2026SecureKeyMustBeLongEnough
   expiration-ms: 86400000 # 24 hours
 
+whistledrop:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:https://whistledrop-teal.vercel.app}
+
 springdoc:
   api-docs:
     path: /v3/api-docs
